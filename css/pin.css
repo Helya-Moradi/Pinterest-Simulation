@@ -1,0 +1,240 @@
+.main-container {
+    position: relative;
+    margin: 100px 0 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.back {
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 25px;
+}
+
+.back:hover {
+    background-color: #f0f0f0;
+}
+
+.back img {
+    width: 24px;
+}
+
+.pin-container {
+    display: flex;
+    width: 100%;
+    max-width: 950px;
+    margin: 0 30px;
+    box-shadow: 0 0 20px rgb(230, 230, 230);
+    border-radius: 32px;
+    overflow: hidden;
+}
+
+.image-part {
+    position: relative;
+    margin: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 450px;
+    flex: 95%;
+    display: flex;
+    /* background-color: #f0f0f0; */
+}
+
+.image-part img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.image-part:hover .image-link {
+    visibility: visible;
+    opacity: .9;
+}
+
+.image-part:hover .image-link:hover {
+    opacity: .8;
+}
+
+.zoom-in {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 4%;
+    width: 92%;
+}
+
+.image-link {
+    height: 40px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.image-search:hover {
+    opacity: .8;
+}
+
+.image-search {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .9;
+}
+
+.image-search .fa-search {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.comment-part {
+    flex: 100%;
+    margin: 30px;
+    padding-top: 10px;
+}
+
+.part-head {
+    display: flex;
+    align-items: center;
+}
+
+.part-more,
+.part-share,
+.part-link {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.part-more:hover,
+.part-share:hover,
+.part-link:hover {
+    background-color: #f0f0f0;
+}
+
+.part-more img,
+.part-share img,
+.part-link img {
+    width: 24px;
+}
+
+
+.part-profile {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.part-save {
+    color: #fff;
+}
+
+.comment-link {
+    margin: 15px 0 20px;
+
+}
+
+.comment-link a {
+    color: #000;
+}
+
+.comment-title {
+    cursor: pointer;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.comment-caption {
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.comment {
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.comment .fa-angle-down {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:1100px) {
+    .back {
+        display: none;
+    }
+}
+
+@media screen and (max-width:820px) {
+    .back {
+        display: flex;
+    }
+
+    .image-part {
+        border-radius: 20px 20px 0 0;
+        height: auto;
+        margin: 0px;
+        flex: 80vw;
+    }
+
+    .comment-part {
+        flex: 0;
+    }
+
+    .pin-container {
+        width: 80%;
+        max-width: 550px;
+        margin: 0;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .back {
+        display: none;
+    }
+
+    .comment-part {
+        flex: 0;
+    }
+
+    .pin-container {
+        width: 90%;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:460px) {
+    .comment-title {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width:390px) {
+    .part-profile {
+        display: none;
+    }
+
+    .part-save {
+        margin-left: auto;
+    }
+
+    .comment-title {
+        font-size: 21px;
+    }
+}
