@@ -90,15 +90,21 @@ function loadImages(query) {
         .catch(err => console.log(err))
 }
 
-window.load = loadImages('pinterest');
+
+let lastSearch = localStorage.getItem('lastSearch') || 'pinterest';
+loadImages(lastSearch);
 
 searchInput.addEventListener('keydown', (e) => {
-    if (e.code === "Enter") {
+    if (e.keyCode === 13) {
         if (searchInput.value) {
-            blurInput();
-            searchInput.value = "";
-            searchInput.blur();
             loadImages(searchInput.value);
+            localStorage.setItem('lastSearch', searchInput.value);
+            blurInput();
+            searchInput.blur();
         }
     }
+})
+
+searchInput.addEventListener('click', () => {
+    searchInput.value = "";
 })

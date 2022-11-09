@@ -83,21 +83,34 @@ fetch(`https://api.unsplash.com/search/photos?query=${title} &per_page=1200&clie
                 commentTitle.innerHTML = image.description;
             }
         }
-        save.addEventListener('click', () => {
-            // console.log(image);
-            // //  location.href=image.links.download;
-            // const link = document.createElement("a");
-            // link.href = URL.createObjectURL('image.links.download');
 
-            // link.download = 'photo';
-            // document.body.appendChild(link);
-            // link.click();
-            // document.body.removeChild(link);
-            // delete link;
-        })
+
+        //it's failed
+        
+        // save.addEventListener('click', () => {
+        //     let url = image.links.download_location;
+        //     var binaryData = [];
+        //     binaryData.push(url);
+        //     console.log(binaryData);
+        //     fetch(binaryData, {
+        //             mode: 'no-cors'
+        //         })
+        //         .then(res => res.blob())
+        //         .then(blob => {
+        //             let blobUrl = URL.createObjectURL(blob);
+        //             let a = document.createElement('a');
+        //             // a.download = url.replace(/^.*[\\\/]/, '');
+        //             a.download="image.jpeg"
+        //             a.href = blobUrl;
+        //             document.body.appendChild(a);
+        //             a.click();
+        //             a.remove();
+
+        //         })
+        // })
 
     });
-    
+
 
 
 
