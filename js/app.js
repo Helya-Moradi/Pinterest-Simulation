@@ -75,9 +75,8 @@ function imagesGenerator(pinsArray, query) {
         } else {
             link = "pin.html?id=${query}/${pin.id}";
         }
-        let createUrl = URL.createObjectURL(pin.url);
         galleryContainer.insertAdjacentHTML('beforeend', ` <a class="item" style="background-color: ${pin.color||'#e1e1e1'};" href=${link}>
-    <img src="${pin.urls?.regular||createUrl}" alt="${pin.alt_description||"pin"}" class="images">
+    <img src="${pin.urls?.regular||pin.url}" alt="${pin.alt_description||"pin"}" class="images">
     <div class="overlay">
         <div class="head">
             <div class="profile">
@@ -175,13 +174,11 @@ uploadBtn.addEventListener('click', () => {
 
     if (finput.files[0] && titleInput.value && captionInput.value && linkInput.value) {
 
-
-
         let id = Math.floor(Math.random() * 10 ** 10);
 
         let ownSrc = {
             id: id,
-            url: finput.files[0],
+            url: URL.createObjectURL(finput.files[0]),
             description: titleInput.value,
             caption: captionInput.value,
             link: linkInput.value
