@@ -359,7 +359,7 @@ body {
 .upload-box {
     background-color: var(--white-color);
     width: 60%;
-    max-width: 950px;
+    min-width: 550px;
     height: 82%;
     margin-top: 40px;
     padding: 40px 60px;
@@ -429,8 +429,8 @@ body {
     outline: 8px solid var(--gray2-hover-color);
 }
 
-.upload-img.warn{
-   border-color: var(--red-color);
+.upload-img.warn {
+    border-color: var(--red-color);
 }
 
 .upload-img .upload-icon {
@@ -514,8 +514,8 @@ body {
     color: var(--dark-gray-color);
 }
 
-.right-container input.warn{
-   border-color: var(--red-color);
+.right-container input.warn {
+    border-color: var(--red-color);
 }
 
 .t-input-containr {
@@ -536,10 +536,7 @@ body {
     font-weight: bold;
 }
 
-.c-input {}
-
 .l-input {
-
     font-size: 17px;
 }
 
@@ -558,7 +555,6 @@ body {
 }
 
 @media screen and (max-width:850px) {
-
     .home {
         padding: 13px 0 13px 16px;
         color: var(--black-color);
@@ -583,9 +579,84 @@ body {
         column-count: 2;
         margin: 0 80px;
     }
+
+    .save-btn {
+        font-size: 10px;
+    }
+
+    .t-input {
+        font-size: 24px;
+    }
+
+    .c-input {
+        font-size: 12px;
+    }
+
+    .l-input {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width:640px) {
+
+    .upload-bg {
+        bottom: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: auto;
+    }
+
+    .upload-box {
+        width: 50%;
+        min-width: 300px;
+        height: fit-content;
+        flex-direction: column;
+        padding: 30px 50px;
+        margin: 40px 20px;
+    }
+
+    .letf-container .more {
+        margin-bottom: 0;
+    }
+
+    .right-container {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .up-save {
+        height: 30px;
+        margin: auto;
+        margin-top: 15px;
+    }
+
+    .t-input-containr {
+        margin-top: 15px;
+    }
+
+    .save-btn {
+        font-size: 8px;
+    }
+
+    .upload-img {
+        height: 210px;
+    }
+
+    .upload-img .uload-text {
+        font-size: 12px;
+    }
+
+    .right-container input {
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+
+    .upload-btn {
+        font-size: 11px;
+        margin: auto;
+        height: 40px;
+    }
+
     .gallery-container {
         margin: 0 10px;
     }
@@ -665,54 +736,14 @@ body {
         margin-right: 5px;
     }
 
-
     .more img,
     .share img {
         width: 12px;
     }
 }
 
-
-@media screen and (max-width:465px) {
-    .head {
-        margin: 8px;
-        font-size: 12px;
-    }
-
-    .save {
-        padding: 10px 13px;
-    }
-
-    .foot {
-        margin: 8px;
-        font-size: 12px;
-    }
-
-    .link {
-        padding: 0px 9px;
-        height: 25px;
-    }
-
-    .link img {
-        width: 12px;
-    }
-
-    .link .text {
-        margin-left: 2px;
-    }
-
-    .share,
-    .more {
-        width: 25px;
-        height: 25px;
-    }
-
-    .share {
-        margin-right: 5px;
-    }
-
-    .more img,
-    .share img {
-        width: 12px;
+@media screen and (max-width:336px) {
+    .upload-box {
+        margin: 30px 10px;
     }
 }
