@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Pinterest</title>
 </head>
-   
+
 <body>
     <div class="body-container">
         <nav class="navbar">
@@ -43,6 +43,46 @@
         </nav>
         <div class="gallery-container">
 
+        </div>
+        <div class="add">
+            <i class="fa fa-plus-circle"></i>
+        </div>
+        <div class="upload-bg">
+            <div class="upload-box">
+                <div class="letf-container">
+                    <img src="./images/more-gray.svg" alt="" class="more">
+                    <div class="upload">
+                        <label for="image-input" class="upload-container">
+                            <img src="" alt="" class="load-image">
+                            <div class="upload-img">
+                                <img src="./images/upload.svg" alt="" class="upload-icon">
+                                <div class="uload-text">Drag and drop or click to upload</div>
+                            </div>
+                        </label>
+                        <input type="file" class="finput" accept="image/*" id="image-input" style="display:none;">
+                    </div>
+                    <button class="upload-btn">Save from site</button>
+                </div>
+                <div class="right-container">
+                    <div class="up-save">
+                        <div class="side-save">
+                            <i class="fa fa-angle-down"></i>
+                        </div>
+                        <div class="save-btn">
+                            Save
+                        </div>
+                    </div>
+                    <div class="t-input-containr">
+                        <input type="text" placeholder="Add your title" class="t-input" required>
+                    </div>
+                    <div class="c-input-containr">
+                        <input type="text" placeholder="Tell everyone what your pin is about" class="c-input" required>
+                    </div>
+                    <div class="l-input-containr">
+                        <input type="text" placeholder="Add a destination link" class="l-input" required>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="./js/app.js"></script>

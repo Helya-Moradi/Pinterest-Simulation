@@ -57,42 +57,53 @@ function loadImages(query) {
     fetch(`https://api.unsplash.com/search/photos?query=${query} &per_page=1200&client_id=5OXcnxdQpZLtAG0_jRNpqEQhTlUOQL3TKviFAUbBKm8`)
         .then(res => res.json())
         .then(data => {
-            galleryContainer.innerHTML = '';
-            data.results.forEach(result => {
-                galleryContainer.insertAdjacentHTML('beforeend', ` <a class="item" style="background-color: ${result.color};" href="pin.html?id=${query}/${result.id}">
-        <img src="${result.urls.regular}" alt="${result.alt_description}" class="images">
-        <div class="overlay">
-            <div class="head">
-                <div class="profile">
-                    <span class="profile-text">Profile</span>
-                    <i class="fa fa-angle-down"></i>
-                </div>
-                <div class="save">
-                    Save
-                </div>
-            </div>
-            <div class="foot">
-                <div class="link">
-                    <img src="./images/link.svg" alt="">
-                    <div class="text">site.com</div>
-                </div>
-                <div class="share">
-                    <img src="./images/share.svg" alt="">
-                </div>
-                <div class="more">
-                    <img src="./images/more.svg" alt="">
-                </div>
-            </div>
-        </div>
-    </a>`)
-            });
+            console.log(data);
+            imagesGenerator(data.results, query);
         })
         .catch(err => console.log(err))
 }
 
-
 let lastSearch = localStorage.getItem('lastSearch') || 'pinterest';
 loadImages(lastSearch);
+
+function imagesGenerator(pinsArray, query) {
+    let link;
+    galleryContainer.innerHTML = '';
+    pinsArray.forEach(pin => {
+        if (query === "mypins") {
+            link = "#";
+        } else {
+            link = "pin.html?id=${query}/${pin.id}";
+        }
+        let createUrl = URL.createObjectURL(pin.url);
+        galleryContainer.insertAdjacentHTML('beforeend', ` <a class="item" style="background-color: ${pin.color||'#e1e1e1'};" href=${link}>
+    <img src="${pin.urls?.regular||createUrl}" alt="${pin.alt_description||"pin"}" class="images">
+    <div class="overlay">
+        <div class="head">
+            <div class="profile">
+                <span class="profile-text">Profile</span>
+                <i class="fa fa-angle-down"></i>
+            </div>
+            <div class="save">
+                Save
+            </div>
+        </div>
+        <div class="foot">
+            <div class="link">
+                <img src="./images/link.svg" alt="">
+                <div class="text">site.com</div>
+            </div>
+            <div class="share">
+                <img src="./images/share.svg" alt="">
+            </div>
+            <div class="more">
+                <img src="./images/more.svg" alt="">
+            </div>
+        </div>
+    </div>
+</a>`)
+    })
+}
 
 searchInput.addEventListener('keydown', (e) => {
     if (e.keyCode === 13) {
@@ -107,4 +118,98 @@ searchInput.addEventListener('keydown', (e) => {
 
 searchInput.addEventListener('click', () => {
     searchInput.value = "";
+})
+
+let add = $.querySelector('.add');
+let uploadContainer = document.querySelector('.upload-bg');
+
+add.addEventListener('click', () => {
+    uploadContainer.classList.add('active');
+})
+
+uploadContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('upload-bg')) {
+        closeUploadPage();
+    }
+})
+
+function closeUploadPage() {
+    uploadContainer.classList.remove('active');
+    upload.classList.remove('active');
+    elements.forEach(element => {
+        if (element.classList.contains('warn')) {
+            element.classList.remove('warn');
+        }
+        if (element.value) {
+            element.value = "";
+        }
+    })
+}
+
+let finput = $.querySelector('.finput');
+let loadImage = $.querySelector('.load-image');
+let upload = $.querySelector('.upload');
+
+finput.addEventListener('change', (e) => {
+    let imageUrl = URL.createObjectURL(finput.files[0]);
+    loadImage.setAttribute('src', imageUrl);
+    upload.classList.add('active');
+})
+
+finput.addEventListener('dragenter dragover', (e) => {
+    console.log('enter-over');
+    e.preventDefault()
+
+})
+
+let uploadBtn = $.querySelector('.upload-btn');
+
+let uploadImg = $.querySelector('.upload-img');
+let titleInput = $.querySelector('.t-input');
+let captionInput = $.querySelector('.c-input');
+let linkInput = $.querySelector('.l-input');
+
+let mypinArray = [];
+
+uploadBtn.addEventListener('click', () => {
+
+    if (finput.files[0] && titleInput.value && captionInput.value && linkInput.value) {
+
+
+
+        let id = Math.floor(Math.random() * 10 ** 10);
+
+        let ownSrc = {
+            id: id,
+            url: finput.files[0],
+            description: titleInput.value,
+            caption: captionInput.value,
+            link: linkInput.value
+        }
+        mypinArray.push(ownSrc);
+        imagesGenerator(mypinArray, 'mypins');
+        closeUploadPage();
+
+    } else {
+        if (!finput.files[0]) {
+            uploadImg.classList.add('warn');
+        }
+        if (!titleInput.value) {
+            titleInput.classList.add('warn');
+        }
+        if (!captionInput.value) {
+            captionInput.classList.add('warn');
+        }
+        if (!linkInput.value) {
+            linkInput.classList.add('warn');
+        }
+    }
+})
+
+let elements = [uploadImg, titleInput, captionInput, linkInput];
+
+elements.forEach(element => {
+    element.addEventListener('click', () => {
+        element.classList.remove('warn');
+    })
 })
