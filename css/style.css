@@ -429,6 +429,10 @@ body {
     outline: 8px solid var(--gray2-hover-color);
 }
 
+.upload-img.over{
+    border-color: var(--dark-gray-color);
+}
+
 .upload-img.warn {
     border-color: var(--red-color);
 }

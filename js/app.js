@@ -1,63 +1,9 @@
-let $ = document;
-
-let searchInput = $.getElementById('search-input');
-let searchContainer = $.querySelector('.search-input');
-
-function focusInput() {
-    searchContainer.classList.add('active');
-}
-
-function blurInput() {
-    searchContainer.classList.remove('active');
-}
-
-searchInput.addEventListener('focus', focusInput);
-searchInput.addEventListener('blur', blurInput);
-
-function searchBoxActivate() {
-    if (window.innerWidth <= 640) {
-        let searchIcon = $.querySelector('.fa-search');
-        let home = $.querySelector('.home');
-        let create = $.querySelector('.create');
-
-        searchIcon.addEventListener('click', () => {
-            searchContainer.classList.add('active');
-            home.classList.add('active');
-            create.classList.add('active');
-            searchInput.focus();
-        })
-        searchInput.addEventListener('blur', () => {
-            blurInput();
-            home.classList.remove('active');
-            create.classList.remove('active');
-        });
-    }
-}
-
-window.addEventListener('resize', searchBoxActivate);
-
-let navbar = $.querySelector('.navbar');
-let lastScrollY = 0;
-
-window.addEventListener('scroll', () => {
-    let scrollY = window.scrollY || document.documentElement.scrollTop;
-    if (lastScrollY < scrollY) {
-        navbar.classList.add('scroll')
-    } else {
-        if (scrollY === 0) {
-            navbar.classList.remove('scroll')
-        }
-    }
-    lastScrollY = scrollY;
-})
-
 let galleryContainer = $.querySelector('.gallery-container');
 
 function loadImages(query) {
     fetch(`https://api.unsplash.com/search/photos?query=${query} &per_page=1200&client_id=5OXcnxdQpZLtAG0_jRNpqEQhTlUOQL3TKviFAUbBKm8`)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             imagesGenerator(data.results, query);
         })
         .catch(err => console.log(err))
@@ -73,7 +19,7 @@ function imagesGenerator(pinsArray, query) {
         if (query === "mypins") {
             link = "#";
         } else {
-            link = "pin.html?id=${query}/${pin.id}";
+            link = `pin.html?id=${query}/${pin.id}`;
         }
         galleryContainer.insertAdjacentHTML('beforeend', ` <a class="item" style="background-color: ${pin.color||'#e1e1e1'};" href=${link}>
     <img src="${pin.urls?.regular||pin.url}" alt="${pin.alt_description||"pin"}" class="images">
@@ -142,6 +88,9 @@ function closeUploadPage() {
         if (element.value) {
             element.value = "";
         }
+        if (uploadImg.classList.contains('over')) {
+            uploadImg.classList.remove("over");
+        }
     })
 }
 
@@ -150,16 +99,32 @@ let loadImage = $.querySelector('.load-image');
 let upload = $.querySelector('.upload');
 
 finput.addEventListener('change', (e) => {
-    let imageUrl = URL.createObjectURL(finput.files[0]);
+    console.log(finput.files);
+    setloadboxBg(finput.files[0]);
+})
+
+upload.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadImg.classList.add('over');
+})
+
+upload.addEventListener('dragleave', () => {
+    uploadImg.classList.remove("over");
+});
+
+upload.addEventListener('drop', (e) => {
+    e.preventDefault();
+    console.log(e.dataTransfer.files[0]);
+    finput.files = e.dataTransfer.files;
+    console.log(finput.files);
+    setloadboxBg(e.dataTransfer.files[0]);
+})
+
+function setloadboxBg(url) {
+    let imageUrl = URL.createObjectURL(url);
     loadImage.setAttribute('src', imageUrl);
     upload.classList.add('active');
-})
-
-finput.addEventListener('dragenter dragover', (e) => {
-    console.log('enter-over');
-    e.preventDefault()
-
-})
+}
 
 let uploadBtn = $.querySelector('.upload-btn');
 
